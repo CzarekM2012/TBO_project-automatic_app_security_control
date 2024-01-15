@@ -3,15 +3,16 @@ name: build and push docker
 on: push
 
 jobs:
+  call-tests:
+    name: Test app
+    uses: ./.github/workflows/tests.yml
   docker:
     runs-on: ubuntu-latest
+    needs: call-tests
     steps:
       -
         name: Check out the repo
         uses: actions/checkout@v4
-      -
-        name: Test app
-        uses: ./.github/workflows/tests.yml
       -
         name: Choose tag
         run: |
