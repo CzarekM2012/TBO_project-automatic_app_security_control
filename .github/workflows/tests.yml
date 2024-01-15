@@ -15,7 +15,7 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
-      - name: Build project with Maven and run unit tests
+      - name: Build project with Maven | run unit tests | run spotbugs
         run: |
           cd app
           mvn clean install
