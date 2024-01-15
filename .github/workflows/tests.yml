@@ -20,6 +20,9 @@ jobs:
           cd app
           mvn clean install
 
+      - name: Set up Java for dependency check
+        run: echo "JAVA_HOME=${{ env.JAVA_HOME }}" >> $GITHUB_ENV
+
       - name: Depcheck
         uses: dependency-check/Dependency-Check_Action@1.1.0
         id: Depcheck
