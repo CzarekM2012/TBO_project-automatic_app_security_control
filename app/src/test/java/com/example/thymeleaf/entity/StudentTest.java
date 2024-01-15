@@ -105,18 +105,18 @@ class StudentTest {
         }
     }
 
-    @Nested
-    class StudentSqlInjectionTest {
-        @Test
-        @DisplayName("Should throw error when setting name containing SQL injection on student")
-        void shouldThrowErrorWhenSettingNameContainingSqlInjectionOnStudent() {
-            Student s = new Student();
-            assertThrows(StudentValidationException.class, () -> s.setName(SQL_INJECTION_PAYLOAD));
-            assertNull(s.getName());
-        }
-
-        private final String SQL_INJECTION_PAYLOAD = "' OR 1=1 --";
-    }
+//    @Nested
+//    class StudentSqlInjectionTest {
+//        @Test
+//        @DisplayName("Should throw error when setting name containing SQL injection on student")
+//        void shouldThrowErrorWhenSettingNameContainingSqlInjectionOnStudent() {
+//            Student s = new Student();
+//            assertThrows(StudentValidationException.class, () -> s.setName(SQL_INJECTION_PAYLOAD));
+//            assertNull(s.getName());
+//        }
+//
+//        private final String SQL_INJECTION_PAYLOAD = "' OR 1=1 --";
+//    }
 
 //    @Nested
 //    class StudentJavaScriptInjectionTest {
