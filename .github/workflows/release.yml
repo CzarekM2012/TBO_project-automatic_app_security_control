@@ -1,9 +1,6 @@
 name: build and push docker
 
-on:
-  push:
-  pull_request:
-    types: [closed]
+on: push
 
 jobs:
   docker:
