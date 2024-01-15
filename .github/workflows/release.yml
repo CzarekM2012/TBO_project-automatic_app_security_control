@@ -7,11 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
-        name: Test app
-        uses: ./.github/workflows/tests.yml
-      -
         name: Check out the repo
         uses: actions/checkout@v4
+      -
+        name: Test app
+        uses: ./.github/workflows/tests.yml
       -
         name: Choose tag
         run: |
