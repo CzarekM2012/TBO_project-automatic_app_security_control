@@ -7,6 +7,7 @@ import com.example.thymeleaf.dto.mapper.StudentMapper;
 import com.example.thymeleaf.repository.StudentRepository;
 import com.example.thymeleaf.service.StudentService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +18,12 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/students")
 public class StudentController {
 
-    private StudentService studentService;
-    private StudentRepository studentRepository;
+    private final StudentService studentService;
+    private final StudentRepository studentRepository;
 
     @GetMapping
     public ModelAndView showStudents() {

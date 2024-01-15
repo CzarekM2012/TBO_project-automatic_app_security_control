@@ -1,9 +1,6 @@
 package com.example.thymeleaf.entity;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,8 +11,8 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
-@Getter
 @Entity
+@NoArgsConstructor
 @Table(name = "student")
 @EqualsAndHashCode(of = {"id"})
 public class Student {
@@ -25,21 +22,41 @@ public class Student {
 
     @Id
     @Setter
+    @Getter
     private String id;
-
+    @Getter
     private String name;
+    @Getter
     private String email;
+    @Getter
     private LocalDate birthday;
-
+    @Getter
     @Column(name = "created_at")
     private LocalDateTime createdAt;
-
+    @Getter
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Setter
     private Address address;
+
+    public Student(Student other) {
+        id = other.id;
+        name = other.name;
+        email = other.email;
+        birthday = other.birthday;
+        createdAt = other.createdAt;
+        updatedAt = other.updatedAt;
+        address = other.address;
+    }
+
+    public Address getAddress() {
+        return new Address(address);
+    }
+
+    public void setAddress(Address otherAddress) {
+        address = new Address(otherAddress);
+    }
 
     public void setName(String name) {
         validateName(name);
@@ -85,7 +102,7 @@ public class Student {
         if (StringUtils.isBlank(name)) {
             throw new StudentValidationException("Name is blank");
         }
-        if (!hasLengthBetween(name, StudentValidationConstants.NAME_MIN_LENGTH, StudentValidationConstants.NAME_MAX_LENGTH)) {
+        if (doesNotHaveLengthBetween(name, StudentValidationConstants.NAME_MIN_LENGTH, StudentValidationConstants.NAME_MAX_LENGTH)) {
             throw new StudentValidationException(String.format(
                     "Name length must be between %d and %d",
                     StudentValidationConstants.NAME_MIN_LENGTH, StudentValidationConstants.NAME_MAX_LENGTH
@@ -97,7 +114,7 @@ public class Student {
         if (StringUtils.isBlank(email)) {
             throw new StudentValidationException("Email is blank");
         }
-        if (!hasLengthBetween(email, StudentValidationConstants.EMAIL_MIN_LENGTH, StudentValidationConstants.EMAIL_MAX_LENGTH)) {
+        if (doesNotHaveLengthBetween(email, StudentValidationConstants.EMAIL_MIN_LENGTH, StudentValidationConstants.EMAIL_MAX_LENGTH)) {
             throw new StudentValidationException(String.format(
                     "Email length must be between %d and %d",
                     StudentValidationConstants.EMAIL_MIN_LENGTH, StudentValidationConstants.EMAIL_MAX_LENGTH
@@ -118,8 +135,8 @@ public class Student {
         }
     }
 
-    private static boolean hasLengthBetween(@NonNull String value, int min, int max) {
-        return value.length() >= min && value.length() <= max;
+    private static boolean doesNotHaveLengthBetween(@NonNull String value, int min, int max) {
+        return value.length() < min || value.length() > max;
     }
 
     static final class StudentValidationException extends RuntimeException {
