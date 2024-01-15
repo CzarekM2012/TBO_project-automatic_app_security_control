@@ -1,6 +1,6 @@
 # ---- Build Stage ----
 # Use Maven base image from the Docker Hub
-FROM maven:3.8.3-openjdk-11-slim AS build
+FROM maven:3.8.3-openjdk-17-slim AS build
 
 # Set the current working directory inside the image
 WORKDIR /app
