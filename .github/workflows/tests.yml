@@ -4,6 +4,7 @@ on: workflow_call
 
 jobs:
   SCA-testing:
+    name: Dependency check
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
