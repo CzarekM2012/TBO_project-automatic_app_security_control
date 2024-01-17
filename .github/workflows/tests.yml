@@ -19,7 +19,7 @@ jobs:
         id: buildApp
         run: |
           cd app
-          mvn clean install -DskipTests
+          mvn clean install -DskipTests -Dspotbugs.skip=true
 
       - name: Run unit tests
         run: |

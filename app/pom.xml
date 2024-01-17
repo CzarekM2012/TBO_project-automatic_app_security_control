@@ -104,7 +104,6 @@
 					</execution>
 				</executions>
 				<configuration>
-					<skip>true</skip>
 					<effort>Max</effort>
 					<threshold>Low</threshold>
 					<failOnError>true</failOnError>
