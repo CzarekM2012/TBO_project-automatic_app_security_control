@@ -27,6 +27,12 @@ jobs:
           mvn test
         if: always() && steps.buildApp.outcome == 'success'
 
+      - name: run spotbugs
+        run: |
+          cd app
+          mvn spotbugs:run@find-bugs
+        if: always() && steps.buildApp.outcome == 'success'
+
       - name: Depcheck
         uses: dependency-check/Dependency-Check_Action@1.1.0
         env:
