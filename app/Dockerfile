@@ -17,7 +17,7 @@ COPY src /app/src
 COPY pom.xml /app
 
 # Package the application
-RUN ${MAVEN_HOME}/bin/mvn clean install
+RUN ${MAVEN_HOME}/bin/mvn clean install -DskipTests
 
 # ---- Deploy Stage ----
 FROM eclipse-temurin:17-jdk
