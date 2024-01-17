@@ -43,7 +43,7 @@ jobs:
           path: './app'
           format: 'HTML'
           args: >
-            --failOnCVSS 7
+            --failOnCVSS 1
             --enableRetired
         if: always() && steps.buildApp.outcome == 'success'
 
