@@ -21,13 +21,13 @@ jobs:
           cd app
           mvn clean install -DskipTests
 
-      - name: run unit tests and spotbugs
+      - name: Run unit tests
         run: |
           cd app
           mvn test
         if: always() && steps.buildApp.outcome == 'success'
 
-      - name: run spotbugs
+      - name: Run spotbugs
         run: |
           cd app
           mvn spotbugs:check@find-bugs
