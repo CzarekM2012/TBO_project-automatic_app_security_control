@@ -25,6 +25,7 @@ jobs:
         run: |
           cd app
           mvn test
+        if: always() && steps.buildApp.outcome == 'success'
 
       - name: Depcheck
         uses: dependency-check/Dependency-Check_Action@1.1.0
@@ -38,30 +39,11 @@ jobs:
           args: >
             --failOnCVSS 7
             --enableRetired
+        if: always() && steps.buildApp.outcome == 'success'
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
         with:
           name: Depcheck_report
           path: ${{github.workspace}}/reports
-
-  #SAST-testing:
-  #  runs-on: ubuntu-latest
-  #  steps:
-  #    -
-  #      name: Check out the repo
-  #      uses: actions/checkout@v4
-
-  #run-unit-tests:
-  #  runs-on: ubuntu-latest
-  #  steps:
-  #    -
-  #      name: Check out the repo
-  #      uses: actions/checkout@v4
-
-  #DAST-testing:
-  #  runs-on: ubuntu-latest
-  #  steps:
-  #    -
-  #      name: Check out the repo
-  #      uses: actions/checkout@v4
+        if: always() && steps.Depcheck.outcome == 'success'
