@@ -30,7 +30,7 @@ jobs:
       - name: run spotbugs
         run: |
           cd app
-          mvn spotbugs:run@find-bugs
+          mvn spotbugs:check@find-bugs
         if: always() && steps.buildApp.outcome == 'success'
 
       - name: Depcheck
