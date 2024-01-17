@@ -3,8 +3,7 @@ name: tests
 on: workflow_call
 
 jobs:
-  SCA-testing:
-    name: Dependency check
+  testing:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
@@ -16,10 +15,16 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
-      - name: Build project with Maven | run unit tests | run spotbugs
+      - name: Build project with Maven
+        id: buildApp
         run: |
           cd app
-          mvn clean install
+          mvn clean install -DskipTests
+
+      - name: run unit tests and spotbugs
+        run: |
+          cd app
+          mvn test
 
       - name: Depcheck
         uses: dependency-check/Dependency-Check_Action@1.1.0
