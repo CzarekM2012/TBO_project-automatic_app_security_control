@@ -50,6 +50,6 @@ jobs:
       - name: Upload test results
         uses: actions/upload-artifact@v4
         with:
-          name: Depcheck_report
+          name: test_reports
           path: ${{github.workspace}}/reports
-        if: always() && steps.Depcheck.outcome == 'success'
+        if: always() && steps.buildApp.outcome == 'success'
