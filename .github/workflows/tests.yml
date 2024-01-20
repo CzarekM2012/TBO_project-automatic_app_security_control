@@ -36,7 +36,6 @@ jobs:
       - name: Depcheck
         env:
           JAVA_HOME: /opt/jdk
-        with:
         run: >
           docker run owasp/dependency-check:latest
           --project Example_Java_app
