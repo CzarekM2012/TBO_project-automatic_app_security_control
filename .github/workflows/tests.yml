@@ -34,12 +34,11 @@ jobs:
         if: always() && steps.buildApp.outcome == 'success'
 
       - name: Depcheck
-        uses: addnab/docker-run-action@v3
         env:
           JAVA_HOME: /opt/jdk
         with:
-          image: owasp/dependency-check:latest
-          options: >
+        run: >
+            docker run owasp/dependency-check:latest
             --project Example_Java_app
             --scan ${{github.workspace}}/app
             --out ${{github.workspace}}/reports
