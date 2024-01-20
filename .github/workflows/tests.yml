@@ -37,7 +37,9 @@ jobs:
         env:
           JAVA_HOME: /opt/jdk
         run: >
-          docker run owasp/dependency-check:latest
+          docker run
+          -v ${{github.workspace}}:${{github.workspace}}
+          owasp/dependency-check:latest
           --project Example_Java_app
           --scan ${{github.workspace}}/app
           --out ${{github.workspace}}/reports
