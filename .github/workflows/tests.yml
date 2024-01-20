@@ -35,16 +35,17 @@ jobs:
 
       - name: Depcheck
         uses: addnab/docker-run-action@v3
-        image: owasp/dependency-check:latest
         env:
           JAVA_HOME: /opt/jdk
-        options: >
-          --project Example_Java_app
-          --scan ${{github.workspace}}/app
-          --out ${{github.workspace}}/reports
-          --noupdate
-          --failOnCVSS 5
-          --enableRetired
+        with:
+          image: owasp/dependency-check:latest
+          options: >
+            --project Example_Java_app
+            --scan ${{github.workspace}}/app
+            --out ${{github.workspace}}/reports
+            --noupdate
+            --failOnCVSS 5
+            --enableRetired
         if: always() && steps.buildApp.outcome == 'success'
 
       - name: Upload test results
