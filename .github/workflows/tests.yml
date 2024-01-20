@@ -34,18 +34,16 @@ jobs:
         if: always() && steps.buildApp.outcome == 'success'
 
       - name: Depcheck
+        uses: CzarekM2012/Dependency-Check_Action@main
         env:
           JAVA_HOME: /opt/jdk
-        run: >
-          docker run
-          -v ${{github.workspace}}:${{github.workspace}}
-          owasp/dependency-check:latest
-          --project Example_Java_app
-          --scan ${{github.workspace}}/app
-          --out ${{github.workspace}}/reports
-          --noupdate
-          --failOnCVSS 5
-          --enableRetired
+        with:
+          project: 'Example Java app'
+          path: './app'
+          format: 'HTML'
+          args: >
+            --failOnCVSS 0
+            --enableRetired
         if: always() && steps.buildApp.outcome == 'success'
 
       - name: Upload test results
