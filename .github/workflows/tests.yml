@@ -38,13 +38,13 @@ jobs:
           JAVA_HOME: /opt/jdk
         with:
         run: >
-            docker run owasp/dependency-check:latest
-            --project Example_Java_app
-            --scan ${{github.workspace}}/app
-            --out ${{github.workspace}}/reports
-            --noupdate
-            --failOnCVSS 5
-            --enableRetired
+          docker run owasp/dependency-check:latest
+          --project Example_Java_app
+          --scan ${{github.workspace}}/app
+          --out ${{github.workspace}}/reports
+          --noupdate
+          --failOnCVSS 5
+          --enableRetired
         if: always() && steps.buildApp.outcome == 'success'
 
       - name: Upload test results
