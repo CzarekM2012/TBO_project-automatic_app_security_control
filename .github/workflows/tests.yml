@@ -47,7 +47,7 @@ jobs:
         if: always() && steps.buildApp.outcome == 'success'
 
       - name: DAST scan
-        uses: zaproxy/action-full-scan@0.2.0
+        uses: zaproxy/action-full-scan@v0.10.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           target: 'http://localhost'
