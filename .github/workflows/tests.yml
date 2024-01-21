@@ -52,6 +52,7 @@ jobs:
           target: 'http://localhost'
           format: 'html'
           failAction: false
+        if: always() && steps.buildApp.outcome == 'success'
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
