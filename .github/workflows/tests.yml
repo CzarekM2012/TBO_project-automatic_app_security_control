@@ -4,7 +4,6 @@ on: workflow_call
 
 jobs:
   testing:
-    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
