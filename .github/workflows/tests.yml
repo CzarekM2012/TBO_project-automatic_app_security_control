@@ -48,6 +48,7 @@ jobs:
 
       - name: Run app
         run: java -jar target/thymeleaf-0.0.1-SNAPSHOT.jar &
+        if: always() && steps.buildApp.outcome == 'success'
 
       - name: DAST scan
         uses: zaproxy/action-baseline@v0.8.0
