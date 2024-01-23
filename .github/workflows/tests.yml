@@ -47,7 +47,7 @@ jobs:
         if: always() && steps.buildApp.outcome == 'success'
 
       - name: Run app
-        run: java -jar target/thymeleaf-0.0.1-SNAPSHOT.jar &
+        run: java -jar app.jar &
         if: always() && steps.buildApp.outcome == 'success'
 
       - name: DAST scan
