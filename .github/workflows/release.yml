@@ -4,6 +4,7 @@ on: push
 
 jobs:
   call-tests:
+    permissions: write-all
     name: Test app
     uses: ./.github/workflows/tests.yml
   docker:
