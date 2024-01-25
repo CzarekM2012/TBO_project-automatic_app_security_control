@@ -57,12 +57,12 @@ jobs:
         with:
           context: ./app
           load: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:dast
+          tags: temp/test:dast
         if: always() && steps.setupBuildx.outcome == 'success'
 
       - name: Run app
         id: runTestImage
-        run: docker run -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:dast
+        run: docker run -p 8080:8080 temp/test:dast
         if: always() && steps.buildTestImage.outcome == 'success'
 
       - name: DAST scan
