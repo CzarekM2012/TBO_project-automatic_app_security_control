@@ -62,7 +62,7 @@ jobs:
 
       - name: Run app
         id: runTestImage
-        run: docker run -p 8080:8080 temp/test:dast
+        run: docker run -p 8080:8080 temp/test:dast &
         if: always() && steps.buildTestImage.outcome == 'success'
 
       - name: DAST scan
@@ -71,6 +71,10 @@ jobs:
           docker_name: 'ghcr.io/zaproxy/zaproxy:stable'
           target: 'http://localhost:8080'
           fail_action: false
+        if: always() && steps.runTestImage.outcome == 'success'
+
+      - name: Stop app
+        run: docker container stop $(docker ps -l -q)
         if: always() && steps.runTestImage.outcome == 'success'
 
       - name: Upload test results
