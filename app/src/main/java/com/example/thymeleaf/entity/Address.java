@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 @Setter
@@ -49,16 +50,18 @@ public class Address {
     private Student student;
 
     public Address(Address other) {
-        id = other.id;
-        zipCode = other.zipCode;
-        street = other.street;
-        number = other.number;
-        complement = other.complement;
-        district = other.district;
-        city = other.city;
-        state = other.state;
-        createdAt = other.createdAt;
-        updatedAt = other.updatedAt;
+        if (!Objects.isNull(other)) {
+            id = other.id;
+            zipCode = other.zipCode;
+            street = other.street;
+            number = other.number;
+            complement = other.complement;
+            district = other.district;
+            city = other.city;
+            state = other.state;
+            createdAt = other.createdAt;
+            updatedAt = other.updatedAt;
+        }
     }
 
     public Student getStudent() {

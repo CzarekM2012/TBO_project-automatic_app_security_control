@@ -41,13 +41,15 @@ public class Student {
     private Address address;
 
     public Student(Student other) {
-        id = other.id;
-        name = other.name;
-        email = other.email;
-        birthday = other.birthday;
-        createdAt = other.createdAt;
-        updatedAt = other.updatedAt;
-        address = other.address;
+        if (!Objects.isNull(other)) {
+            id = other.id;
+            name = other.name;
+            email = other.email;
+            birthday = other.birthday;
+            createdAt = other.createdAt;
+            updatedAt = other.updatedAt;
+            address = other.address;
+        }
     }
 
     public Address getAddress() {
