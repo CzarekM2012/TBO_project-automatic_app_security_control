@@ -54,6 +54,7 @@ jobs:
         if: always() && steps.buildApp.outcome == 'success'
 
   dynamic-tests:
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
